@@ -1,0 +1,22 @@
+# One command to reproduce every paper figure:
+#
+#   docker compose up --build
+#
+# Figures land in ./figures on the host. The Criteo dataset (./data) and
+# per-run outputs (./experiments) are bind-mounted so they persist and are
+# reused across runs (the dataset download is skipped if ./data is populated).
+services:
+  reproduce:
+    build: .
+    image: bigbird-artifact:latest
+    # Defaults to root (portable). To own outputs as your host user instead:
+    #   UID=$(id -u) GID=$(id -g) docker compose up --build
+    user: "${UID:-0}:${GID:-0}"
+    volumes:
+      - ./figures:/artifact/figures
+      - ./data:/artifact/data
+      - ./experiments:/artifact/experiments
+    environment:
+      # Cap worker threads (default: all cores). e.g. BB_THREADS=8 docker compose up
+      BB_THREADS: "${BB_THREADS:-}"
+    # ./reproduce.sh (the image CMD) runs once and exits.

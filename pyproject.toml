@@ -1,0 +1,28 @@
+[project]
+name = "bigbird"
+version = "0.1.0"
+description = "Evaluation framework for Big Bird: measuring sybil attacks against privacy-preserving advertising (SOSP 2026)."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12.7"
+dependencies = [
+    "pip>=24.2",
+    "rust-just>=1.36.0",
+    "plotly>=6.2.0",
+    "loguru>=0.7.3",
+    "typer>=0.15.1",
+    "numpy>=2.2.3",
+    "marimo>=0.14.11",
+    "huggingface_hub>=0.30.0",
+    "polars>=1.24.0",
+    "kaleido==0.2.1",
+    "matplotlib>=3.10.8",
+]
+
+
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

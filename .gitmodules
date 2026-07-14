@@ -1,0 +1,9 @@
+[submodule "pdslib"]
+	path = pdslib
+	url = https://github.com/columbia/pdslib
+[submodule "firefox-prototype/pdslib-firefox"]
+	path = firefox-prototype/pdslib-firefox
+	url = https://github.com/columbia/pdslib-firefox
+[submodule "firefox-prototype/pdslib-firefox-extension"]
+	path = firefox-prototype/pdslib-firefox-extension
+	url = https://github.com/columbia/pdslib-firefox-extension

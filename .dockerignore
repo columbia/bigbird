@@ -1,0 +1,30 @@
+# Keep the build context small and reproducible.
+# NOTE: pdslib/ is intentionally NOT ignored — it is the submodule the build needs.
+
+# Git metadata (including the submodule's .git)
+.git
+**/.git
+.gitmodules
+
+# Rust build output (rebuilt inside the image)
+target
+**/target
+
+# Python venv + caches (recreated inside the image)
+.venv
+**/__pycache__
+**/*.pyc
+.uv-cache
+
+# Bind-mounted / generated at runtime — must not bloat the context
+data
+experiments
+figures
+logs
+results
+
+# Misc
+*.log
+.DS_Store
+.claude
+CLAUDE.md

@@ -1,0 +1,6 @@
+# Rust toolchain pin for the Big Bird SOSP 2026 artifact.
+# Pinned to a concrete recent stable for reproducibility (edition 2024 needs
+# rustc >= 1.85). Matches the Docker base image `rust:1.97-bookworm`.
+[toolchain]
+channel = "1.97.0"
+components = ["rustfmt", "clippy"]

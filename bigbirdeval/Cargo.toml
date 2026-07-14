@@ -1,0 +1,50 @@
+[package]
+name = "bigbirdeval"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "Evaluation framework for Big Bird: measuring sybil attacks against privacy-preserving advertising (SOSP 2026)."
+repository = "https://github.com/columbia/bigbird"
+
+[dependencies]
+polars = { version = "0.52", features = [
+    "parquet",
+    "lazy",
+    "is_in",
+    "timezones", # https://github.com/pola-rs/polars/issues/25148#issuecomment-3505173352
+] }
+statrs = "0.18"
+serde = "1.0"
+serde_json = "1.0"
+flate2 = "1.1"
+time = { version = "0.3", features = ["macros", "local-offset", "formatting"] }
+# keep rand at 0.8 for compatibility with statrs 0.18
+rand = "0.8"
+thread_local = "1.1"
+fragile = "2.0"
+enum_dispatch = "0.3"
+mimalloc = { version = "*", features = ["secure"] }
+nohash = "0.2.0"
+
+anyhow = "1.0"
+kdam = { version = "0.6" }
+log = "0.4"
+log4rs = "1.3"
+terminal_size = "0.4"
+
+pdslib = { path = "../pdslib", features = ["fxhash", "experimental"] }
+rustc-hash = "2.1.1"
+clap = { version = "4.5.54", features = ["derive"] }
+prehash = "1.0.0"
+
+[profile.release]
+debug = true # for more informative flamegraphs
+lto = "thin"
+
+# 1. Optimize all dependencies (Release-like speed)
+[profile.dev.package."*"]
+opt-level = 3
+
+# 2. Exception: Keep 'pdslib' unoptimized (Debug-friendly)
+[profile.dev.package.pdslib]
+opt-level = 0
